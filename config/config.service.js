@@ -17,6 +17,7 @@ export const port = process.env.PORT ?? 7000
 export const DB_URI=process.env.DB_URI
 export const JWT_SECRET=process.env.JWT_SECRET
 export const JWT_EXPIRES=process.env.JWT_EXPIRES
+export const REFRESH_SECRET=process.env.REFRESH_SECRET
 
 
 export const SALT_ROUND = parseInt(process.env.SALT_ROUND ?? '10')
