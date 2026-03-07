@@ -1,4 +1,5 @@
 
+import { resolve } from 'node:path'
 import { NODE_ENV, port } from '../config/config.service.js'
 import { connectDataBase } from './DB/connection.db.js'
 import { authRouter, userRouter } from './modules/index.js'
@@ -9,9 +10,15 @@ async function bootstrap() {
     //convert buffer data
     app.use(express.json())
     await connectDataBase()
-    //application routing
+    console.log({ssssssssssssssssssssss:resolve( "../uploads")});
+    
+    app.use("/uploads", express.static(resolve("../uploads"))); 
+    
+       //application routing
     app.get('/', (req, res) => res.send('Hello World!'))
     app.use('/auth', authRouter)
+    app.use('/user', userRouter)
+
 
 
     //invalid routing
@@ -25,10 +32,10 @@ async function bootstrap() {
         return res.status(status).json({
             error_message:
                 status == 500 ? 'something went wrong' : error.message ?? 'something went wrong',
-            stack: NODE_ENV == "development" ? error.stack : undefined
+            stack: error.stack 
         })
     })
-    
+
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 }
 export default bootstrap
