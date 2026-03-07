@@ -25,7 +25,9 @@ const userSchema = new Schema({
     DOB: Date,
     password: {
         type: String,
-        required: true,
+        required: function () {
+            return this.provider == ProviderEnum.System
+        },
         minLength: 8
     }
     ,
@@ -45,7 +47,13 @@ const userSchema = new Schema({
     isVerified: {
         type: Boolean,
         default: false
-    }
+    }, profileCoverPic: { type: [String], default: null }, 
+    profileImage: { type: String, default: null },CCT:Date
+    ,role: {
+  type: Number,
+  enum: [0, 1],
+  default: 0
+}
 }
     , {
         collection: "Users",
