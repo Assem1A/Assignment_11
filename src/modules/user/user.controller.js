@@ -1,11 +1,44 @@
 import { Router } from "express";
-import { logout, profile, profileCoverImage, profileImage, shareProfile } from "./user.service.js";
+import { _2stepVerification, _2stepVerificationVerify, forgetPassword, forgetPassword2, logout, profile, profileCoverImage, profileImage, shareProfile, updatePassword } from "./user.service.js";
 import { auth, authorization } from "../../middleware/auth.middleware.js";
-import { imageBeValid, imageValiddssdfs, validss } from "../../middleware/validation.middleware.js";
+import { forgetPasswordValidation, imageBeValid, imageValiddssdfs, updatePasswordValidation, validss } from "../../middleware/validation.middleware.js";
 import { localFileUpload ,fileFieldValidation} from "../../common/utils/multer.js";
 const router=Router()
 router.post("/logout",auth,async (req,res,next)=>{
-        const status=await logout(req.body,req.user,req.decoded)
+        console.log(req.body.flag);
+        
+        const status=await logout(req.body.flag,req.user,req.decoded)
+        return res.status(200).json({message:"Profile" , status})
+
+})  
+router.post("/_2stepVerification",auth,async (req,res,next)=>{
+        
+        const status=await _2stepVerification(req.user.email)
+        return res.status(200).json({message:"Profile" , status})
+
+})  
+router.post("/update-password",auth,updatePasswordValidation,async (req,res,next)=>{
+        console.log(req.user);
+        
+        const status=await updatePassword(req.body.password,req.body.newPassword,req.user)
+        return res.status(200).json({message:"password updated successfully" , status})
+
+}) 
+router.post("/forget-password",forgetPasswordValidation,async (req,res,next)=>{
+        
+        const status=await forgetPassword(`${req.body.otp}`,req.body.newPassword,req.body.email)
+        return res.status(200).json({message:"password updated successfully" , status})
+
+}) 
+router.post("/forget-password-otp",async (req,res,next)=>{
+        
+        const status=await forgetPassword2(req.body.email)
+        return res.status(200).json({message:"password updated successfully" , status})
+
+}) 
+router.post("/_2stepVerification-verify",auth,async (req,res,next)=>{
+        
+        const status=await _2stepVerificationVerify(req.body)
         return res.status(200).json({message:"Profile" , status})
 
 })  

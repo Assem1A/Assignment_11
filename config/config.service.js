@@ -18,6 +18,14 @@ export const DB_URI=process.env.DB_URI
 export const JWT_SECRET=process.env.JWT_SECRET
 export const JWT_EXPIRES=process.env.JWT_EXPIRES
 export const REFRESH_SECRET=process.env.REFRESH_SECRET
+export const REDIS_URI=process.env.REDIS_URI
+export const MY_FIRST_APP_PASSWORD=process.env.MY_FIRST_PROJECT_PASSWORD
+
+export const EMAIL_APP=process.env.EMAIL_APP
+export const APP=process.env.APP
+
+
+
 
 
 export const SALT_ROUND = parseInt(process.env.SALT_ROUND ?? '10')

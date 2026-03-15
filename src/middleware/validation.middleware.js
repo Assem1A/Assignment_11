@@ -1,5 +1,5 @@
-import { loginSchema, signupSchema } from "../modules/auth/auth.validation.js"
-import {  profileCoverImage, profileImage112, validsss } from "../modules/user/user.validation.js";
+import { confirmEmailSchema, loginSchema, signupSchema } from "../modules/auth/auth.validation.js"
+import {  forgetPasswordValids, profileCoverImage, profileImage112, updatePasswordValids, validsss } from "../modules/user/user.validation.js";
 
 export const valid=(req,res,next)=>{
         const validation=signupSchema.validate(req.body,{abortEarly:false})
@@ -7,7 +7,14 @@ export const valid=(req,res,next)=>{
             throw new 
 Error("validation error", { cause: { status: 409 } })     
    }
-   console.log("done validationm");
+   next()
+}
+export const validationElConfirm=(req,res,next)=>{
+        const validation=confirmEmailSchema.validate(req.body,{abortEarly:false})
+        if(validation.error){
+            throw new 
+Error("validation error", { cause: { status: 409 } })     
+   }
    next()
 }
 export const valil=(req,res,next)=>{
@@ -16,7 +23,6 @@ export const valil=(req,res,next)=>{
             throw new 
 Error("validation error", { cause: { status: 409 } })     
    }
-   console.log("done validationm");
    next()
 }
 export const validss=(req,res,next)=>{
@@ -25,7 +31,6 @@ export const validss=(req,res,next)=>{
             throw new 
 Error("validation error", { cause: { status: 409 } })     
    }
-   console.log("done validationm");
    next()
 }
 export const imageValiddssdfs=(req,res,next)=>{
@@ -44,5 +49,23 @@ export const imageBeValid=(req,res,next)=>{
 Error("validation error", { cause: { status: 409 } })     
    }
    console.log("done validationm elsora");
+   next()
+}
+export const updatePasswordValidation=(req,res,next)=>{
+          const validation=updatePasswordValids.validate(req.body,{abortEarly:false})
+        if(validation.error){
+            throw new 
+Error("validation error", { cause: { status: 409 } })     
+   }
+   console.log("done validationm elupdate");
+   next()
+}
+export const forgetPasswordValidation=(req,res,next)=>{
+          const validation=forgetPasswordValids.validate(req.body,{abortEarly:false})
+        if(validation.error){
+            throw new 
+Error("validation error", { cause: { status: 409 } })     
+   }
+   console.log("done validationm elupdate");
    next()
 }

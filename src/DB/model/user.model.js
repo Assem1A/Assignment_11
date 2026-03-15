@@ -30,14 +30,18 @@ const userSchema = new Schema({
         },
         minLength: 8
     }
-    ,
+    , verificationExpires: {
+    type: Date,
+    default: () => new Date(Date.now() + 24 * 60 * 60 * 1000),
+    expires: 0
+  },
     gender: {
         type: String,
         enum: [GenderEnum.Male, GenderEnum.Female],
         default: GenderEnum.Male
     }
     , phone: String,
-    confirmEmail: Date,
+    confirmEmail: Date,_2stepVerification: Date,
     provider: {
         type: String,
         enum: Object.values(ProviderEnum),

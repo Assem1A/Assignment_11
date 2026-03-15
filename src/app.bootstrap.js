@@ -4,14 +4,17 @@ import { NODE_ENV, port } from '../config/config.service.js'
 import { connectDataBase } from './DB/connection.db.js'
 import { authRouter, userRouter } from './modules/index.js'
 import express from 'express'
+import { connectRedis, redisClient } from './DB/redis.connection.DB.js'
+import { get1, set } from './DB/redis/resis.service.js'
+import { get } from 'node:http'
+import { sendEmail } from './common/utils/sendEmail.js'
 
 async function bootstrap() {
     const app = express()
     //convert buffer data
     app.use(express.json())
     await connectDataBase()
-    console.log({ssssssssssssssssssssss:resolve( "../uploads")});
-    
+    await connectRedis()
     app.use("/uploads", express.static(resolve("../uploads"))); 
     
        //application routing

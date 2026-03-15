@@ -10,3 +10,7 @@ export const signupSchema=loginSchema.append().keys({
     phone:Joi.string().pattern(new RegExp(/^(00201|\+201|01)(0|1|2|5)\d{8}$/)).required(),
     role:Joi.number().valid(0,1).required()
 })
+export const confirmEmailSchema=Joi.object().keys({
+    email:Joi.string().email().required(),
+otp:Joi.string().pattern(new RegExp(/^\d{6}$/)).required()
+})

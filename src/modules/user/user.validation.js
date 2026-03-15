@@ -35,3 +35,14 @@ export const profileCoverImage={
         }).required()
     ).min(1).max(5).required()
 }
+export const updatePasswordValids=Joi.object().keys({
+        password:Joi.string().pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,16}$/)).required(),
+        newPassword:Joi.string().pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,16}$/)).required(),
+        newPasswordConfirm:Joi.string().valid(Joi.ref("newPassword")).required()
+})
+export const forgetPasswordValids=Joi.object().keys({
+        otp:Joi.required(),
+        newPassword:Joi.string().pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,16}$/)).required(),
+        newPasswordConfirm:Joi.string().valid(Joi.ref("newPassword")).required(),    email:Joi.string().email().required(),
+        
+})
